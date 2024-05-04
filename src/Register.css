@@ -1,0 +1,256 @@
+
+
+
+.wrapper{
+    position: absolute;
+    z-index: 10000;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+   border-radius: 0px;
+    display: flex;
+    background: rgb(4, 41, 86);
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+.Register-section{
+    z-index: 100000;
+}
+
+.sub-wrapper{
+    width: 550px;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+.form-box{
+    width: 100%;
+    padding: 40px;
+}
+
+.form-box h2{
+    font-size: 2rem;
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.input-boxes{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    border-bottom:  4px solid rgba(249, 229, 229, 0.5);
+    margin: 30px 0;
+}
+
+
+ .input-boxes label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: rgb(5, 30, 53);
+    font-size: 1.2rem;
+    font-weight: 600;
+    pointer-events: none;
+transition: .3s ease-in-out;
+}
+
+.remeberforgot a{
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 550;
+    
+}
+.remeberforgot a:hover, .register p a:hover{
+   text-decoration: underline;
+}
+
+.input-boxes input:focus~label,
+ .input-boxes input:valid~label{
+     top: -5px;
+ }
+ 
+ .input-boxes .icon ion-icon, .input-boxes .icon i{
+    position: absolute;
+    right: 8px;
+    font-size: 1.3rem;
+    color: rgb(5, 30, 53);
+    line-height: 67px;
+    margin-top: 10px;
+}
+
+.remeberforgot{
+    font-size: 1rem;
+    color: rgb(5, 30, 53);
+    font-weight: 550;
+    margin: -15px 0 15px 0;
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+  
+}
+
+.remeberforgot #terms{
+      display: block;
+      color: var(--primary);
+      text-align: start;
+}
+
+.remeberforgot #terms.active{
+    display: block;
+}
+
+
+
+.remeberforgot label input{
+    accent-color: var(--main);
+    margin-right: 3px;
+}
+
+ .input-boxes input{
+     width: 100%;
+     height: 100%;
+     color: rgb(255, 255, 255,0.5);
+     font-weight: normal;
+     overflow: hidden;
+     white-space: nowrap;
+     text-overflow: ellipsis;
+     font-size: 1.3rem;
+     background-color: transparent;
+     border: none;
+     padding-right: 60px;
+     padding: 0 20px 0 10px;
+   /*  border: 2px solid rgb(255, 255, 255,0.5);*/
+     border-radius: 10px;   
+ 
+ }
+ 
+ .btn:hover{
+    animation: none;
+    box-shadow: 0;
+ }
+
+ .btn{
+    width: 100%;
+    height: 40px;
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: rgb(5, 30, 53);
+    font-weight: 800;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: var(--primary);
+    transition: 1s linear;
+    cursor: pointer;
+    outline: none;
+    animation: animater 3s linear infinite ;
+    
+  }
+  @keyframes animater {
+       0%{
+          box-shadow: 0 0 2rem var(--primary);
+       }
+       50%{
+          box-shadow: none;
+          
+       }
+       100%{
+          box-shadow: 0 0 2rem var(--primary);
+       }
+       
+  }
+
+  .passwordConent.active{
+       display: block;
+  }
+
+  .passwordConent{
+    background: rgba(254, 93, 93, 0.156);
+    backdrop-filter:  blur(100%);
+    position: absolute;
+    display: none;
+    transition: all 1s ease;
+    width: 100%;
+    margin-top: 5px;
+    text-align: initial;
+    z-index: 99999999999999999999999;
+    top: -100%;
+    left: 100%;
+    list-style: none;
+    font-weight: normal;
+    color: var(--text-color2);
+ }
+
+ .error-txt{
+    background: rgba(254, 93, 93, 0.156);
+    margin-bottom: 0px;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    text-transform: capitalize;
+    display: block;
+    transition: .2s ease;
+    color: red;
+    font-size: 1.3rem;
+    text-wrap: wrap;
+}
+ .error-txt.active{
+    display: block;
+ }
+
+
+ .passwordConent p{
+    color: red;
+    padding: 10px;
+    margin-bottom: -3px;
+    text-align: center;
+    font-weight: 600;
+ }
+
+ .passwordConent ul li{
+    color: #000000;
+    padding: 3px;   
+    list-style: none;    
+ }
+ .passwordConent ul li i{
+    font-size: 9px;
+    color: #000000;
+    margin-right: 10px;
+
+ }
+ .passwordConent ul li span{
+    letter-spacing: 1px;
+ }
+
+ 
+ .register-area{
+    font-size: 1.0rem;
+    color: white;
+    text-align: center;
+    font-weight: 550;
+    margin: 20px 0 10px;
+}
+.register-area p a{
+    text-decoration: none;
+    color: var(--primary);
+    transition: .5s linear;
+}
+
+.register-area p a:hover{
+    text-decoration: underline;
+    
+}

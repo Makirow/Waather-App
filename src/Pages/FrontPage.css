@@ -1,0 +1,53 @@
+.front{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background-color: rgb(4, 41, 86);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.front.active{
+    display: none;
+}
+
+.input-field{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+}
+
+.input-field input{
+    padding: 10px 20px;
+    border: none;
+    min-width:  350px;
+    outline: none;
+    font-size:  1.2rem ;
+    font-weight: 550;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.input-field button{
+    background-color: var(--primary);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 10px 20px;
+    font-size:  1.3rem ;
+    font-weight: 600;
+    cursor: pointer !important;
+    border: none;
+    transition: 0.5s linear;
+    
+}
+
+.input-field button:hover{
+    background: #3b2f80;
+}

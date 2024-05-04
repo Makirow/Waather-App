@@ -1,0 +1,212 @@
+.Container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background:linear-gradient(60deg, rgb(4, 41, 86) 1000% , #3b2f80 100%);
+    align-items: center;
+    justify-content: center;
+}
+.container-sections{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Period-of-Day{
+     text-align: center;
+    font-size: 30px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.Date-Info{
+    position: absolute;
+    left: 0%;
+    margin-bottom: 50px;
+     top: 20px;
+     width: 100%;
+     gap: 20px;
+     display: flex ;
+     align-items: center;
+     justify-content: center;
+}
+
+.section-divider{
+    display: flex;
+    margin-top: 80px;
+    height: 80%;
+    width: 100%;
+    flex-direction: column;
+    letter-spacing: 1px;
+    position: relative;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    background: rgb(5, 30, 53);
+    border-radius: 20px;
+    
+}
+
+.front-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.weather-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 100%;
+    flex-direction: column;
+}
+
+
+
+.weather-image:nth-last-child(4){
+    background: red;
+}
+
+.Container .weather-image img{
+     width: 250px;
+     height: 250px;
+}
+
+.weather-temperature{
+    display: flex;
+    color: var(--primary) ;
+    font-size: 50px;
+    text-wrap: nowrap;
+    font-family: 400;
+}
+.Grid-area{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    padding: 0 30px;
+}
+
+.weather-Location{
+    display: flex;
+    font-size: 40px;
+    color: var(--primary);
+     font-weight: 400;
+    justify-content: center;
+
+}
+
+.data-container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    gap: 20px;
+    
+}
+
+.elements{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+.data{
+    font-size: 30px;
+    font-family: 400;
+    width: 100%;
+}
+.any{
+    background: red;
+    font-size: 100px;
+}
+
+.description{
+    color: white;
+    font-size: 30px;
+    width: 100%;
+    margin-top: -30px;
+    margin-bottom: 30px;
+    text-wrap: nowrap;
+    text-align: center;
+}
+
+.Nearest-Area{
+     display: flex;
+     width: 100%;
+      margin-top: 80px;     
+     align-items: flex-start;
+     height: 100%;
+     flex-direction: column;
+}
+.Nearest-Area h2{
+    text-align: center;
+    color: var(--primary);
+    width: 100%;
+    font-size: 25px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.Nearest-Area img{
+    width: 100px;
+    height: 100px;
+}
+
+
+.names{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 40px;
+    color: var(--primary);
+    font-weight: 400;
+}
+.Nearest-Area .weather-temperature, .country {
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}
+.Nearest-Area .weather-Location{
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
+}
+
+.section-splitter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100px;
+    background: rgb(5, 30, 53);
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.humidy-text, .humidy-percent{
+    font-size: 20px;
+}
+
+.elements .icons{
+    width: 50px;
+    height: 50px;
+}
+
+
+
+
+.Location-info{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
