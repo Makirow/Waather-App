@@ -5,49 +5,94 @@
     background-color: rgb(4, 41, 86);
     top: 0;
     left: 0;
+    padding: 0rem;
     right: 0;
     bottom: 0;
     z-index: 10000;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     transition: 0.2s;
+
+    .wrapper{
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0px;
+
+        p{
+            color: rgb(255, 255, 255, 0.6);
+            font-size: 1.2rem;
+            padding: 30px;
+            padding-bottom: 0;
+            width: 70%;
+            text-align: center;
+        }
+        .highlight{
+              color: white;
+              font-size: 1rem;
+        }
+    }
+   
+
+    h1{
+        color: white;
+        letter-spacing: 1px;
+        font-size: 3rem;
+        text-transform: uppercase;
+        text-align: center;
+        span{
+            color: var(--primary);
+        }
+    }
+
+
+    .input-field{
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        width: 100%;
+        align-items: center;
+       margin-top: 20px;
+    }
+
+    
+    
+    .input-field input{
+        padding: 10px 20px;
+        border: none;
+        min-width:  350px;
+        outline: none;
+        font-size:  1.2rem ;
+        font-weight: 550;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+    .input-field button{
+        background-color: var(--primary);
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        padding: 10px 20px;
+        font-size:  1.3rem ;
+        font-weight: 600;
+        cursor: pointer !important;
+        border: none;
+        transition: 0.5s linear;
+        
+    }
+    
+    .input-field button:hover{
+        background: #3b2f80;
+    }
+
+    .highlight{
+        font-size: 1.1rem;
+        color: white;
+    }
 }
 
 .front.active{
     display: none;
 }
 
-.input-field{
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    align-items: center;
-}
-
-.input-field input{
-    padding: 10px 20px;
-    border: none;
-    min-width:  350px;
-    outline: none;
-    font-size:  1.2rem ;
-    font-weight: 550;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-.input-field button{
-    background-color: var(--primary);
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    padding: 10px 20px;
-    font-size:  1.3rem ;
-    font-weight: 600;
-    cursor: pointer !important;
-    border: none;
-    transition: 0.5s linear;
-    
-}
-
-.input-field button:hover{
-    background: #3b2f80;
-}

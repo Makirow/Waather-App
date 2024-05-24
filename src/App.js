@@ -10,11 +10,11 @@ function App() {
   return (
     <>
    
-    <Container/>
+  
       <BrowserRouter>
       
                  <Routes>
-                         <Route element={<Register/>} path='/signup'>    </Route>
+                         <Route element={<Register/>} path='/'>    </Route>
                          <Route element={<Login/>} path='/login'>    </Route>
                          <Route element={<Container/>} path='/homepage'>    </Route>
                  </Routes>

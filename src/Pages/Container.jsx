@@ -24,6 +24,12 @@ import LogoImage from '../Image/LogoImage';
 import Register from '../Register';
 import Login from '../Login';
 
+import { toast } from 'react-toastify';
+import Notification from '../Components/notification/Notification';
+import { auth } from '../Components/Firebase';
+import { signOut } from 'firebase/auth';
+import { Link } from 'react-router-dom';
+
 
 
 function Container() {
@@ -799,114 +805,134 @@ const FindFunct = async() => {
   
 if (elements[0].value === "") {
 
-return 0;
+toast.warn("Please Enter A Town");
 
 }
-let Url  = `https://api.openweathermap.org/data/2.5/weather?q=${elements[0].value}&units=Metric&appid=${API_Key}`;
-let reponse = await fetch(Url);
-let Data1 = await reponse.json();
+else{
 
-const weathertemperature1 = document.getElementsByClassName("temp4");
-   const weathertown = document.getElementsByClassName("town4");
-   const weatherCountry = document.getElementsByClassName("country14");
-   const Humidty = document.getElementsByClassName("humidy-percent");
-   const Wind = document.getElementsByClassName("Wind-rate");
-   const Description = document.getElementsByClassName("description");
-   const Sunshine = document.getElementsByClassName("sunny-percent");
-   const DayTime = document.getElementsByClassName("Period-of-Day");
-   const SunshineRate = 100 - Data1.clouds.all;
-   Humidty[0].innerHTML = Data1.main.humidity+" %";
-     Wind[0].innerHTML = Data1.wind.speed+" km/h";
-   Sunshine[0].innerHTML = SunshineRate.toFixed(0)+"%";
-
-   const dt = Data1.dt;
-   const timezone = Data1.timezone
-    
-   const LocalTime = dt + timezone;
-   const Hours = Math.floor(LocalTime / 3600) % 24;
-   
-   const CurrentDate = new Date(LocalTime * 1000);
-   
-   const Dateof = CurrentDate.getDay();
-   const Days0fWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday" , "Saturday", "Sunday"]
-   
-   const Dates = CurrentDate.getDate();
-   
-   const Month = CurrentDate.getMonth();
-   const MonthsOfYear = ["January", "February", "March", "April", "May" , "June", "August",  "September", "October", "November", "December"]
-   
-   const  Year = CurrentDate.getFullYear();
-   
-   
-   const WeatherDay = document.getElementsByClassName("Day");
-   const WeatherMonth = document.getElementsByClassName("Month");
-   const WeatherDate = document.getElementsByClassName("Dates");
-   const WeatherYear = document.getElementsByClassName("Year");
-   
-   WeatherDay[0].innerHTML = Days0fWeek[Dateof];
-   WeatherMonth[0].innerHTML = MonthsOfYear[Month];
-   WeatherYear[0].innerHTML = Year;
-   WeatherDate[0].innerHTML = Dates;
-   
-   let DayPeriod;
-   
-   if (6 <= Hours && Hours <12) {
-     DayPeriod = "Morning";
-     DayTime[0].innerHTML =  DayPeriod+",";
-   }
-   else if (12 <= Hours && Hours < 18) {
-     DayPeriod = "Afternoon";
-     DayTime[0].innerHTML =  DayPeriod+",";
-   }
-   else if (18 <= Hours && Hours < 22) {
-     DayPeriod = "Evening";
-     DayTime[0].innerHTML =  DayPeriod+",";
-   }
-   else {
-     DayPeriod = "Night";
-     DayTime[0].innerHTML =  DayPeriod+",";
-   }
-   
-      weathertemperature1[0].innerHTML = Data1.main.temp+" ℃";
-      weathertown[0].innerHTML = Data1.name+",";
-      weatherCountry[0].innerHTML = Data1.sys.country;  
-      Description[0].innerHTML =  Data1.weather[0].description+" "+"("+Data1.weather[0].icon+")";
-   
-   
-      if(Data1.weather[0].icon === "01d" || Data1.weather[0].icon === "01n"){
-       setwicon(sunny_icon);
-   }
-   else if(Data1.weather[0].icon === "02d" || Data1.weather[0].icon === "02n"){
-    setwicon(cloudy_icon);
-   }
-   
-   else if(Data1.weather[0].icon === "09d" || Data1.weather[0].icon === "09n"){
-   setwicon(rainy_icon);
-   }
-   else if(Data1.weather[0].icon === "10d" || Data1.weather[0].icon === "10n"){
-   setwicon(normal_icon);
-   }
-   
-   else if(Data1.weather[0].icon === "13d" || Data1.weather[0].icon === "13n"){
-   setwicon(snow_icon);
-   }
-   
-   else if(Data1.weather[0].icon === "03d" || Data1.weather[0].icon === "03n"){
-   setwicon(cloudy_icon);
-   }
-   
-   
-   else if(Data1.weather[0].icon === "04d" || Data1.weather[0].icon === "04n"){
+  let Url  = `https://api.openweathermap.org/data/2.5/weather?q=${elements[0].value}&units=Metric&appid=${API_Key}`;
+  let reponse = await fetch(Url);
+  let Data1 = await reponse.json();
+  
+  const weathertemperature1 = document.getElementsByClassName("temp4");
+     const weathertown = document.getElementsByClassName("town4");
+     const weatherCountry = document.getElementsByClassName("country14");
+     const Humidty = document.getElementsByClassName("humidy-percent");
+     const Wind = document.getElementsByClassName("Wind-rate");
+     const Description = document.getElementsByClassName("description");
+     const Sunshine = document.getElementsByClassName("sunny-percent");
+     const DayTime = document.getElementsByClassName("Period-of-Day");
+     const SunshineRate = 100 - Data1.clouds.all;
+     Humidty[0].innerHTML = Data1.main.humidity+" %";
+       Wind[0].innerHTML = Data1.wind.speed+" km/h";
+     Sunshine[0].innerHTML = SunshineRate.toFixed(0)+"%";
+  
+     const dt = Data1.dt;
+     const timezone = Data1.timezone
+      
+     const LocalTime = dt + timezone;
+     const Hours = Math.floor(LocalTime / 3600) % 24;
+     
+     const CurrentDate = new Date(LocalTime * 1000);
+     
+     const Dateof = CurrentDate.getDay();
+     const Days0fWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday" , "Saturday", "Sunday"]
+     
+     const Dates = CurrentDate.getDate();
+     
+     const Month = CurrentDate.getMonth();
+     const MonthsOfYear = ["January", "February", "March", "April", "May" , "June", "August",  "September", "October", "November", "December"]
+     
+     const  Year = CurrentDate.getFullYear();
+     
+     
+     const WeatherDay = document.getElementsByClassName("Day");
+     const WeatherMonth = document.getElementsByClassName("Month");
+     const WeatherDate = document.getElementsByClassName("Dates");
+     const WeatherYear = document.getElementsByClassName("Year");
+     
+     WeatherDay[0].innerHTML = Days0fWeek[Dateof];
+     WeatherMonth[0].innerHTML = MonthsOfYear[Month];
+     WeatherYear[0].innerHTML = Year;
+     WeatherDate[0].innerHTML = Dates;
+     
+     let DayPeriod;
+     
+     if (6 <= Hours && Hours <12) {
+       DayPeriod = "Morning";
+       DayTime[0].innerHTML =  DayPeriod+",";
+     }
+     else if (12 <= Hours && Hours < 18) {
+       DayPeriod = "Afternoon";
+       DayTime[0].innerHTML =  DayPeriod+",";
+     }
+     else if (18 <= Hours && Hours < 22) {
+       DayPeriod = "Evening";
+       DayTime[0].innerHTML =  DayPeriod+",";
+     }
+     else {
+       DayPeriod = "Night";
+       DayTime[0].innerHTML =  DayPeriod+",";
+     }
+     
+        weathertemperature1[0].innerHTML = Data1.main.temp+" ℃";
+        weathertown[0].innerHTML = Data1.name+",";
+        weatherCountry[0].innerHTML = Data1.sys.country;  
+        Description[0].innerHTML =  Data1.weather[0].description+" "+"("+Data1.weather[0].icon+")";
+     
+     
+        if(Data1.weather[0].icon === "01d" || Data1.weather[0].icon === "01n"){
+         setwicon(sunny_icon);
+     }
+     else if(Data1.weather[0].icon === "02d" || Data1.weather[0].icon === "02n"){
+      setwicon(cloudy_icon);
+     }
+     
+     else if(Data1.weather[0].icon === "09d" || Data1.weather[0].icon === "09n"){
+     setwicon(rainy_icon);
+     }
+     else if(Data1.weather[0].icon === "10d" || Data1.weather[0].icon === "10n"){
+     setwicon(normal_icon);
+     }
+     
+     else if(Data1.weather[0].icon === "13d" || Data1.weather[0].icon === "13n"){
+     setwicon(snow_icon);
+     }
+     
+     else if(Data1.weather[0].icon === "03d" || Data1.weather[0].icon === "03n"){
      setwicon(cloudy_icon);
-   }
-   else{
-   setwicon(snow_icon)
-   }
+     }
+     
+     
+     else if(Data1.weather[0].icon === "04d" || Data1.weather[0].icon === "04n"){
+       setwicon(cloudy_icon);
+     }
+     else{
+     setwicon(snow_icon)
+     }
+  
+  
 
+}
 
 }
   
+const [logOut, setLogOut] =  useState(false)
 
+const Logout = () =>{
+ /* signOut(auth).then(() =>{
+
+    setLogOut(true)
+
+  }).catch((error) => {
+        
+    const errorCode = error.code;
+    const errorMessage = error.message
+    toast.error(errorMessage)
+    setLogOut(false)
+
+  })*/
+}
 
 
 
@@ -916,10 +942,23 @@ const weathertemperature1 = document.getElementsByClassName("temp4");
 
 <section className={`front ${State === true ? 'active' : undefined}`}>
 
-         <div className="input-field">
-             <input type="text" className='country-input' placeholder='Enter your town' />
+  <div className='wrapper'>
+        <h1>Welcome To <span>Weather-Teller</span> </h1>
+
+        <p>The Number 1 website in the country where you can be find the weather information of anywhere in the world
+        </p>
+        <p className='highlight'>To get started Please enter any area in the world you wish to know its weather condition</p>
+  
+        <div className="input-field">
+             <input type="text" className='country-input' required placeholder='Enter your area' />
              <button type="button" onClick={() => {FindFunct()}}>Find</button>
          </div>
+  
+  </div>
+
+         
+
+         <Notification/>
 
 </section>
 
@@ -928,13 +967,13 @@ const weathertemperature1 = document.getElementsByClassName("temp4");
      
      <LogoImage />
 
-      <div className='logo'> WeatherApp </div>
+      <div className='logo'> Weather-teller </div>
 
      
 <div className="search-Section">
 
 <div className="search">
-          <input type="text" className='InputText' placeholder='Search Country weather...' />
+          <input type="text" className='InputText' placeholder='Search town weather...' />
           
     </div>
 
@@ -947,8 +986,8 @@ const weathertemperature1 = document.getElementsByClassName("temp4");
 
 <ul className='nav'>
              
-            <li><a href="#" className='option'>Logout </a></li>
-            <li><a href='#' className='option'>Update </a></li>
+         <Link to={logOut ? "/signup" : undefined}> <li onClick={Logout} ><a href="#" className='option'>Logout </a></li></Link>  
+           
             
 </ul>  
        

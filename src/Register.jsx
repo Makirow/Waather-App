@@ -1,45 +1,77 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Register.css";
-import { auth } from "./Components/Firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { auth, db } from "./Components/Firebase";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { Link, useHref, useNavigate, } from "react-router-dom";
+import { toast } from 'react-toastify';
+
+import Notification from "./Components/notification/Notification";
+
 
 
 function Register() {
 
 
     const [state, setState] = useState(false);
-    const SignUp= () => {
+    
+let newLocate = useNavigate()
+    const newLocation = useHref("/homepage")
+    const oldLocation = useHref(" ")
 
-        const login = document.getElementsByClassName("Register-section");
- 
-        setTimeout(function() {
-            setState(!state);
-        }, 1000);
+     const [locate, setLocation] = useState(false)
 
-                
-            }
 
-            const [UserName, setUserName] = useState('');
-            const [Email, setEmail] = useState('');
-            const [Password, setPassword] = useState('');
-            const [ConfirmPassword, setConfirmPassword] = useState('');
-
-  const handleSubmit = async(info) =>{
-    info.preventDefault();
-
-  try{
-        
-         createUserWithEmailAndPassword(auth,  Email, Password);
-         console.log("Account Successfully created")
-
-  }catch(error){
-      console.log(error);
+  const HandleSignUpForm = async(e) =>{
+    e.preventDefault()
+     const formData = new FormData(e.target);
+  
+     const {username, email, password} = Object.fromEntries(formData);
      
+     try {
 
+        setLocation(true);
+     
+            const response = await createUserWithEmailAndPassword(auth, email, password);
+  
+            await setDoc(doc(db, "username", response.user.uid), {
+                   username, email,
+                   id: response.user.uid,
+                   blocked: []
+                  
+            });
+  
+  
+            await setDoc(doc(db, "userchat", response.user.uid), {
+              chats: [],
+             
+       });
+  
+             toast.success("Account Successfully Created");
+             toast.success("Please clickagain this time to enter");
+            
+           
+      
+     } catch (error) {
+           console.log(error);
+           toast.error(error.message)
+           setLocation(false)
+           
+     }
+
+   
+  
   }
-
-  } 
+  
+  
+  const checking = () =>{
+    if (locate) {
+          newLocate("/homepage")
+    }
+    else{
+     newLocate("/")
+    }
+}
 
     return(
         <div className="wrapper Register-section">
@@ -53,23 +85,23 @@ function Register() {
         <div className="error-txt">
                 hello
        </div>
-            <form action="#"  onSubmit={handleSubmit}>
+            <form action="#"  onSubmit={HandleSignUpForm}>
                 
             <div className="input-boxes Username boxes">
                     <span className="icon"><ion-icon name="person"></ion-icon></span>
-                    <input type="text" id="regtext1" required autoComplete="off" name="Username" onChange={(info) => setUserName(info.target.value)} />
+                    <input type="text" id="regtext1" autoComplete="off" name="username" />
                     <label htmlFor="username" >User Name</label>
                 </div>
     
                 <div className="input-boxes regemail1 boxes ">
                     <span className="icon"><ion-icon name="mail"></ion-icon></span>
-                    <input type="email" id="regemail1" required autoComplete="off" name="Email" onChange={(info) => setEmail(info.target.value)} />
+                    <input type="email" id="regemail1"autoComplete="off" name="email" />
                     <label htmlFor="email">Email</label>
                 </div> 
     
                 <div className="input-boxes regpassword">
                     <span className="icon"><ion-icon  name="eye" ></ion-icon></span>
-                    <input type="password" id="regpassword" required autoComplete="off" name="Password" onChange={(info) => setPassword(info.target.value)}  />
+                    <input type="password" id="regpassword" required autoComplete="off" name="password"  />
                     <label htmlFor="password"> Password</label>
     
                     <div className="passwordConent">
@@ -99,14 +131,7 @@ function Register() {
                        </div>
                 </div>
 
-                <div className="input-boxes regpassword">
-                    <span className="icon"><ion-icon  name="eye" ></ion-icon></span>
-                    <input type="password" id="regpassword" required autoComplete="off" name="Password" onChange={(info) => setConfirmPassword(info.target.value)} />
-                    <label htmlFor="confirmpassword">Confirm Password</label>
-    
-                   
-                </div>
-    
+                    
                 <div className="remeberforgot" > 
                                         
                                                   <label id="terms"  > By Sign Up i agree to your terms 
@@ -115,7 +140,7 @@ function Register() {
                                             
                                                
                                          </div>
-                                         <button type="submit" class=" btn btn-primary submitBtn"><Link>Sign Up </Link></button>
+                                        <button  onClick={checking} type="submit" class=" btn btn-primary submitBtn"><Link to={locate ? "/homepage" : undefined}>Sign Up </Link></button> 
                                          
                                          <div className="register-area">
                                              <p>Already have an account? <a href="#" className="login-link" ><Link to="/login"> Sign In Now!</Link></a></p>
@@ -125,6 +150,8 @@ function Register() {
     </div>
     
     </div>
+
+    <Notification />
     
         </div>
     
